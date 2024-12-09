@@ -5,7 +5,8 @@
         "core": "*",
         "radio": "*",
         "microphone": "*",
-        "radio-broadcast": "*"
+        "radio-broadcast": "*",
+        "sfc": "github:51bit/sfc#v0.1.1"
     },
     "files": [
         "main.blocks",
