@@ -4,17 +4,15 @@ enum RadioMessage {
     hello = 49337,
     message1 = 49434
 }
-function wie_alt_bist_du () {
+function zwei_x () {
     while (!(input.buttonIsPressed(Button.AB))) {
         if (input.buttonIsPressed(Button.A)) {
-            zwei_.change(LedSpriteProperty.Y, 1)
+            zwei_.turn(Direction.Right, 45)
         } else {
-            if (input.buttonIsPressed(Button.B)) {
-                zwei_.change(LedSpriteProperty.Y, -1)
-            }
+            zwei_.turn(Direction.Left, 45)
         }
     }
-    eria()
+    punkt_1x()
 }
 function kleines_l_erstellen_und_drehen () {
     Lklein = [game.createSprite(0, 1), game.createSprite(0, 0), game.createSprite(1, 0)]
@@ -25,53 +23,30 @@ function kleines_l_erstellen_und_drehen () {
             Lklein.turn(Direction.Left, 45)
         }
     }
-    kaufhaus()
+    kleines_ly()
 }
-function kaufhaus () {
+function punkt_1y () {
     while (!(input.buttonIsPressed(Button.AB))) {
         if (input.buttonIsPressed(Button.A)) {
-            schiff1.change(LedSpriteProperty.Y, 1)
+            _3.change(LedSpriteProperty.Y, 1)
         } else {
             if (input.buttonIsPressed(Button.B)) {
-                schiff1.change(LedSpriteProperty.Y, -1)
-            }
-        }
-    }
-}
-function komm_mit () {
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.A)) {
-            schiff1.change(LedSpriteProperty.Y, 1)
-        } else {
-            if (input.buttonIsPressed(Button.B)) {
-                schiff1.change(LedSpriteProperty.Y, -1)
+                _3.change(LedSpriteProperty.Y, -1)
             }
         }
     }
     _2()
 }
-function eria () {
+function kleines_ly () {
     while (!(input.buttonIsPressed(Button.AB))) {
         if (input.buttonIsPressed(Button.A)) {
-            Lklein.turn(Direction.Right, 45)
+            Lklein.change(LedSpriteProperty.Y, 1)
         } else {
-            Lklein.turn(Direction.Left, 45)
-        }
-    }
-    ppunkt()
-}
-function ppunkt () {
-    _3 = game.createSprite(0, 0)
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.B)) {
-            schiff1.move(1)
-        } else {
-            if (input.buttonIsPressed(Button.A)) {
-                schiff1.change(LedSpriteProperty.X, -1)
+            if (input.buttonIsPressed(Button.B)) {
+                Lklein.change(LedSpriteProperty.Y, -1)
             }
         }
     }
-    komm_mit()
 }
 radio.onReceivedMessage(RadioMessage.hallo, function () {
     basic.showIcon(IconNames.Yes)
@@ -100,6 +75,31 @@ function _ () {
     }
     kleines_l_erstellen_und_drehen()
 }
+function zwai_y () {
+    while (!(input.buttonIsPressed(Button.AB))) {
+        if (input.buttonIsPressed(Button.A)) {
+            zwei_.change(LedSpriteProperty.Y, 1)
+        } else {
+            if (input.buttonIsPressed(Button.B)) {
+                zwei_.change(LedSpriteProperty.Y, -1)
+            }
+        }
+    }
+    zwei_x()
+}
+function zwa () {
+    zwei_ = [game.createSprite(0, 1), game.createSprite(0, 0)]
+    while (!(input.buttonIsPressed(Button.AB))) {
+        if (input.buttonIsPressed(Button.A)) {
+            zwei_.change(LedSpriteProperty.X, 1)
+        } else {
+            if (input.buttonIsPressed(Button.B)) {
+                zwei_.change(LedSpriteProperty.X, -1)
+            }
+        }
+    }
+    zwai_y()
+}
 function _2 () {
     _22 = game.createSprite(0, 0)
     while (!(input.buttonIsPressed(Button.AB))) {
@@ -112,22 +112,22 @@ function _2 () {
         }
     }
 }
-function cola () {
-    zwei_ = [game.createSprite(0, 1), game.createSprite(0, 0)]
+function punkt_1x () {
+    _3 = game.createSprite(0, 0)
     while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.A)) {
-            zwei_.change(LedSpriteProperty.X, 1)
+        if (input.buttonIsPressed(Button.B)) {
+            _3.move(1)
         } else {
-            if (input.buttonIsPressed(Button.B)) {
-                zwei_.change(LedSpriteProperty.X, -1)
+            if (input.buttonIsPressed(Button.A)) {
+                _3.change(LedSpriteProperty.X, -1)
             }
         }
     }
-    wie_alt_bist_du()
+    punkt_1y()
 }
 let _22: game.LedSprite = null
-let _3: game.LedSprite = null
 let schiff1: game.LedSprite = null
+let _3: game.LedSprite = null
 let Lklein: game.LedSprite[] = []
 let zwei_: game.LedSprite[] = []
 radio.setGroup(1)
