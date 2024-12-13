@@ -47,6 +47,7 @@ function kleines_ly () {
             }
         }
     }
+    zwa()
 }
 radio.onReceivedMessage(RadioMessage.hallo, function () {
     basic.showIcon(IconNames.Yes)
@@ -88,7 +89,7 @@ function zwai_y () {
     zwei_x()
 }
 function zwa () {
-    zwei_ = [game.createSprite(0, 1), game.createSprite(0, 0)]
+    zwei_ = [game.createSprite(0, 1), game.createSprite(0, 0), game.createSprite(0, 0)]
     while (!(input.buttonIsPressed(Button.AB))) {
         if (input.buttonIsPressed(Button.A)) {
             zwei_.change(LedSpriteProperty.X, 1)
