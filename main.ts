@@ -4,132 +4,83 @@ enum RadioMessage {
     hello = 49337,
     message1 = 49434
 }
-function zwei_x () {
+function kleinLerstellen () {
+    // Endlosschleife: Warte auf Drehbefehl
     while (!(input.buttonIsPressed(Button.AB))) {
         if (input.buttonIsPressed(Button.A)) {
-            zwei_.turn(Direction.Right, 45)
-        } else {
-            zwei_.turn(Direction.Left, 45)
+            // Drehung der Gruppe
+            rotateGroup(Lklein)
+            // Anti-Debounce
+            basic.pause(500)
         }
     }
-    punkt_1x()
 }
-function kleines_l_erstellen_und_drehen () {
+function p_2erstellen () {
+    basic.pause(100)
+    while (!(input.buttonIsPressed(Button.AB))) {
+        if (input.buttonIsPressed(Button.B)) {
+            schiff1.change(LedSpriteProperty.Y, 1)
+            basic.pause(100)
+        }
+        if (input.buttonIsPressed(Button.A)) {
+            schiff1.change(LedSpriteProperty.Y, -1)
+            basic.pause(100)
+        }
+    }
+    // Sprite-Gruppe erstellen
     Lklein = [game.createSprite(0, 1), game.createSprite(0, 0), game.createSprite(1, 0)]
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.A)) {
-            Lklein.turn(Direction.Right, 45)
-        } else {
-            Lklein.turn(Direction.Left, 45)
-        }
-    }
-    kleines_ly()
+    kleinLerstellen()
 }
-function punkt_1y () {
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.A)) {
-            _3.change(LedSpriteProperty.Y, 1)
-        } else {
-            if (input.buttonIsPressed(Button.B)) {
-                _3.change(LedSpriteProperty.Y, -1)
-            }
-        }
-    }
-    _2()
-}
-function kleines_ly () {
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.A)) {
-            Lklein.change(LedSpriteProperty.Y, 1)
-        } else {
-            if (input.buttonIsPressed(Button.B)) {
-                Lklein.change(LedSpriteProperty.Y, -1)
-            }
-        }
-    }
-    zwa()
-}
-radio.onReceivedMessage(RadioMessage.hallo, function () {
+function code_start () {
     basic.showIcon(IconNames.Yes)
     basic.pause(2000)
+    // Haupt-Sprite erstellen
     schiff1 = game.createSprite(0, 0)
     while (!(input.buttonIsPressed(Button.AB))) {
         if (input.buttonIsPressed(Button.B)) {
             schiff1.move(1)
-        } else {
-            if (input.buttonIsPressed(Button.A)) {
-                schiff1.change(LedSpriteProperty.X, -1)
-            }
+            basic.pause(100)
         }
-    }
-    _()
-})
-function _ () {
-    while (!(input.buttonIsPressed(Button.AB))) {
         if (input.buttonIsPressed(Button.A)) {
-            schiff1.change(LedSpriteProperty.Y, 1)
-        } else {
-            if (input.buttonIsPressed(Button.B)) {
-                schiff1.change(LedSpriteProperty.Y, -1)
-            }
+            schiff1.move(-1)
+            basic.pause(100)
         }
     }
-    kleines_l_erstellen_und_drehen()
+    p_2erstellen()
 }
-function zwai_y () {
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.A)) {
-            zwei_.change(LedSpriteProperty.Y, 1)
-        } else {
-            if (input.buttonIsPressed(Button.B)) {
-                zwei_.change(LedSpriteProperty.Y, -1)
-            }
-        }
+function rotateGroup (sprites: any[]) {
+    let positions = sprites.map(sprite => {
+        return { x: sprite.get(LedSpriteProperty.X), y: sprite.get(LedSpriteProperty.Y) };
+    });
+// Zentrum der Gruppe annehmen (z.B. bei (2,2))
+    centerX = 2
+    centerY = 2
+    // Berechne neue Positionen für 90° Drehung im Uhrzeigersinn
+    for (let i = 0; i <= Lklein.length - 1; i++) {
+        newX = centerX + (positions[i].y - centerY)
+        newY = centerY - (positions[i].x - centerX)
+        sprites[i].set(LedSpriteProperty.X, newX)
+sprites[i].set(LedSpriteProperty.Y, newY)
     }
-    zwei_x()
+    kleinLerstellen()
 }
-function zwa () {
-    zwei_ = [game.createSprite(0, 1), game.createSprite(0, 0), game.createSprite(0, 0)]
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.A)) {
-            zwei_.change(LedSpriteProperty.X, 1)
-        } else {
-            if (input.buttonIsPressed(Button.B)) {
-                zwei_.change(LedSpriteProperty.X, -1)
-            }
-        }
-    }
-    zwai_y()
-}
-function _2 () {
-    _22 = game.createSprite(0, 0)
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.B)) {
-            schiff1.move(1)
-        } else {
-            if (input.buttonIsPressed(Button.A)) {
-                schiff1.change(LedSpriteProperty.X, -1)
-            }
-        }
-    }
-}
-function punkt_1x () {
-    _3 = game.createSprite(0, 0)
-    while (!(input.buttonIsPressed(Button.AB))) {
-        if (input.buttonIsPressed(Button.B)) {
-            _3.move(1)
-        } else {
-            if (input.buttonIsPressed(Button.A)) {
-                _3.change(LedSpriteProperty.X, -1)
-            }
-        }
-    }
-    punkt_1y()
-}
-let _22: game.LedSprite = null
+let centerY = 0
+let centerX = 0
 let schiff1: game.LedSprite = null
-let _3: game.LedSprite = null
 let Lklein: game.LedSprite[] = []
-let zwei_: game.LedSprite[] = []
+let newX = 0
+let newY = 0
+function controlSprite(sprite: game.LedSprite, property: LedSpriteProperty) {
+    while (!(input.buttonIsPressed(Button.AB))) {
+        if (input.buttonIsPressed(Button.A)) {
+            sprite.change(property, 1);
+        } else if (input.buttonIsPressed(Button.B)) {
+            sprite.change(property, -1);
+        }
+        basic.pause(100); // Verhindert zu schnelles Bewegen
+    }
+}
+// Initialisierung
 radio.setGroup(1)
 radio.sendMessage(RadioMessage.hallo)
+code_start()
